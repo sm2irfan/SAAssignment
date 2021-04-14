@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: CustomersDetailsHandler
+Bundle-SymbolicName: CustomersDetailsHandler
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: customersdetailshandlerver1.Activator
+Bundle-RequiredExecutionEnvironment: JavaSE-15
+Automatic-Module-Name: CustomersDetailsHandlerVer1
+Import-Package: org.osgi.framework;version="1.3.0"
+Bundle-ActivationPolicy: lazy
+Export-Package: customersdetailshandlerver1
