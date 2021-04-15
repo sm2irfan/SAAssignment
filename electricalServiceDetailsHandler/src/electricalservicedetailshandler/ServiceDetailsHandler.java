@@ -2,7 +2,8 @@ package electricalservicedetailshandler;
 
 public interface ServiceDetailsHandler {
 	
-	public String customerType(int customerID);
-	public String PhaseDetails(int customerID);
-	public String TransformerRating(int customerID);
+	
+	public String PhaseDetails(String customerID);
+	public String TransformerRating(String customerID);
+	public String customerType(String customerID);
 }

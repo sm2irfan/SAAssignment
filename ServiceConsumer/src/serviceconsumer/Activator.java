@@ -44,21 +44,21 @@ public class Activator implements BundleActivator {
 		
 		
 		// using payment handler service
-		paymentHandlerServiceVer1.paymentHistory(12);
-		System.out.println(paymentHandlerServiceVer1.AccountBalance(5));
+		paymentHandlerServiceVer1.paymentHistory("id1011");
+		System.out.println(paymentHandlerServiceVer1.AccountBalance("id1011"));
 		
 	
 		
 		
 		
 		// using electrical service details
-		System.out.println("electrical service details: " + serviceDetailsHandler.customerType(2));
+		System.out.println("electrical service details: " + serviceDetailsHandler.customerType("id1011"));
 		
 		
 		
 		
 		//using customer details handler
-		System.out.println("customer details: " + customerDetailsHandlerServiceVer1.name(2));
+		System.out.println("customer details: " + customerDetailsHandlerServiceVer1.name("id1011"));
 	}
 
 	
