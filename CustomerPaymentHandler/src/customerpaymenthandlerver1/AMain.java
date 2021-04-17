@@ -16,6 +16,9 @@ public class AMain {
 		
 		System.out.println(paymentHandlerService.priceClaculation(1000, "industrial"));
 		
+		paymentHandlerService.paymentHistory("id1011");
+		System.out.println("account balance: " + paymentHandlerService.AccountBalance("id1011"));
+		
 		
 		Map<String, ArrayList<String>> multivalueMap = new HashMap<String, ArrayList<String>>();
 		
@@ -35,10 +38,47 @@ public class AMain {
 		
 		Collection<String> value = map.get("ford");
 		
+		for (String str : value) {
+			System.out.println(str);
+		}
+		
 		System.out.println(value);
 		
+		Map <String, historyDele> mapface = new HashMap<String, historyDele>();
+		
+		mapface.put("id1011", new historyDele("1/5/2020",1500.00));
 	
+		System.out.println(mapface.get("id1011").getAmount());
 	
 	}
 
+}
+
+
+
+
+
+class historyDele{
+	
+	String date;
+	double amount;
+	
+	public historyDele(String date, double amount) {
+		super();
+		this.date = date;
+		this.amount = amount;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public double getAmount() {
+		return amount;
+	}
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+	
 }

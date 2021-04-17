@@ -7,6 +7,7 @@ Bundle-Activator: customerpaymenthandlerver1.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-15
 Automatic-Module-Name: CustomerPaymentHandlerVer1
 Import-Package: com.google.common.collect,
+ electricalservicedetailshandler,
  org.osgi.framework;version="1.3.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: customerpaymenthandlerver1
