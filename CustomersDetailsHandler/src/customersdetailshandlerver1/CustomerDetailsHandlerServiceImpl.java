@@ -18,15 +18,15 @@ public class CustomerDetailsHandlerServiceImpl implements CustomerDetailsHandler
 	
 	
 	
-	static String[] keys = new String[] {"id1011", "id1012", "id1013"};
-	static String[] values = new String[] {"aaa", "bbbb", "cccc"};
+	String[] keys = new String[] {"id1011", "id1012", "id1013"};
+	String[] values = new String[] {"aaa", "bbbb", "cccc"};
 	
 	
 	
 	@Override
 	public String name(String customerID) {
 		// TODO Auto-generated method stub
-		final Map<String, String> mapName = new HashMap<String, String>();
+		Map<String, String> mapName = new HashMap<String, String>();
 		loadIntoHash(keys, values, mapName);
 		String name = mapName.get(customerID);
 		if (name == null) {
