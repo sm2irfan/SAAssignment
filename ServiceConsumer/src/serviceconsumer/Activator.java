@@ -118,7 +118,7 @@ public class Activator implements BundleActivator {
 				}
 				if( option == 3 ) {
 					System.out.print("Payment History =>  ");
-					paymentHandlerServiceVer1.paymentHistory(id);
+					paymentHandlerServiceVer1.paymentHistory("id1011");
 				}
 				if( option == 4 ) {
 					
@@ -149,6 +149,8 @@ public class Activator implements BundleActivator {
 			
 			
 				j++;
+				
+				
 			
 		}
 	
