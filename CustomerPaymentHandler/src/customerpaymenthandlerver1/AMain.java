@@ -17,6 +17,7 @@ public class AMain {
 		System.out.println(paymentHandlerService.priceClaculation(1000, "industrial"));
 		
 		paymentHandlerService.paymentHistory("id1012");
+		System.out.println(paymentHandlerService.totalAmountForUsedUnit("id1015"));
 		//System.out.println("account balance: " + paymentHandlerService.AccountBalance("id1012"));
 		
 		

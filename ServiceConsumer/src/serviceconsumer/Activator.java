@@ -123,7 +123,7 @@ public class Activator implements BundleActivator {
 					
 				}
 				if( option == 2 ) {
-					System.out.println(paymentHandlerServiceVer1.AccountBalance(id));
+					System.out.println(paymentHandlerServiceVer1.totalPayment(id));
 				}
 				if( option == 3 ) {
 					System.out.print("Payment History =>  ");

@@ -89,9 +89,27 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 		return (Double) null;
 
 	}
+	
+	@Override
+	public double totalAmountForUsedUnit(String customerID) {
+		
+		
+		String[] customerId = new String[] {"id1011", "id1012", "id1013","id1014","id1015"};
+		Double[] amount = new Double[] {10000.00, 11000.00, 17000.00,25000.00,12000.00};
+		
+		Map<String, Double> customerAcc = new HashMap<String, Double>();
+		
+		for (int i = 0; i < customerId.length; i++) {
+			customerAcc.put(customerId[i], amount[i]);
+		}
+		
+		Double amountValue = customerAcc.get(customerID);
+		
+		return amountValue;
+	}
 
 	@Override
-	public double AccountBalance(String customerID) {
+	public double totalPayment(String customerID) {
 		// TODO Auto-generated method stub
 		double total = 0;
 		
@@ -223,6 +241,8 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 		return filteramountArray;
 
 	}
+
+	
 
 	
 
