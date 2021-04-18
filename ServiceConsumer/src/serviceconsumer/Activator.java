@@ -73,7 +73,7 @@ public class Activator implements BundleActivator {
 		}
 		//Welcome Text
 		System.out.println("---------------------------------------------------------------------");
-		System.out.println("             Welcome " + customerDetailsHandlerServiceVer1.name(id) + ", Logged in : " + dateFormat.format(date) );		
+		System.out.println("Welcome " + customerDetailsHandlerServiceVer1.name(id) + ", Logged in : " + dateFormat.format(date) );		
 		System.out.println("---------------------------------------------------------------------");
 		//System.out.println("      (Enter the appropriate number to access the service below)      ");
 		System.out.println();
@@ -102,19 +102,28 @@ public class Activator implements BundleActivator {
 		int j = 1;
 		while(j<=1) {
 			
-			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+			BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 			System.out.println();
 			
 			System.out.print("Enter the allocated number to access a specific feature -->  ");
-			number = in.readLine();
+			number = input.readLine();
 			System.out.println();
 			int option = Integer.parseInt(number);
 				
 				if( option == 1 ) {
 					
+					System.out.print("Enter no of units -->  ");
+					String unit = input.readLine();
+					
+					int unitAmount = Integer.parseInt(unit);
+					
+					System.out.println(paymentHandlerServiceVer1.priceClaculation(unitAmount, "industrial"));
+					
+					
+					
 				}
 				if( option == 2 ) {
-					
+					System.out.println(paymentHandlerServiceVer1.AccountBalance(id));
 				}
 				if( option == 3 ) {
 					System.out.print("Payment History =>  ");
@@ -164,3 +173,4 @@ public class Activator implements BundleActivator {
 	}
 
 }
+
