@@ -13,11 +13,6 @@ public class CustomerDetailsHandlerServiceImpl implements CustomerDetailsHandler
 		}
 	}
 	
-	
-	
-	
-	
-	
 	String[] keys = new String[] {"id1011", "id1012", "id1013","id1014","id1015"};
 	String[] values1 = new String[] {"Kamal", "Ravi", "Nimal","Kumar","Raj"};
 	String[] values2 = new String[] {"Jaffna", "Mannaar", "Colombo","Kandy","Colombo"};
@@ -32,30 +27,20 @@ public class CustomerDetailsHandlerServiceImpl implements CustomerDetailsHandler
 	        Map<String, String> mapName = new HashMap<String, String>();
 		loadIntoHash(keys, values1, mapName);
 		String name = mapName.get(customerID);
-		if (name == null) {
-			return "please enter correct customer ID";
-		}else {
+		
 			return name;
-		}
+		
 	}
 	
-	
-	
-	
-	
-	
-
 	@Override
 	public String address(String customerID) {
 		// TODO Auto-generated method stub
 		Map<String, String> mapaddress = new HashMap<String, String>();
 		loadIntoHash(keys,values2,mapaddress);
 		String address = mapaddress.get(customerID);
-		if(address==null) {
-			return "please enter correct customer ID";
-		}else {
+		
 			return address;
-		}
+		
 		
 	}
 
@@ -68,11 +53,9 @@ public class CustomerDetailsHandlerServiceImpl implements CustomerDetailsHandler
 	        Map<String, String> mapphoneNo = new HashMap<String, String>();
 		loadIntoHash(keys, values3, mapphoneNo);
 		String phoneNo = mapphoneNo.get(customerID);
-		if (phoneNo == null) {
-			return "please enter correct customer ID";
-		}else {
+		
 			return phoneNo;
-		}
+		
 	}
 	
 	
@@ -83,28 +66,9 @@ public class CustomerDetailsHandlerServiceImpl implements CustomerDetailsHandler
 	        Map<String, String> mapNIC = new HashMap<String, String>();
 		loadIntoHash(keys, values4, mapNIC);
 		String NIC = mapNIC.get(customerID);
-		if (NIC == null) {
-			return "please enter correct customer ID";
-		}else {
+		
 			return NIC;
-		}
+		
 	}
 	
 }	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	

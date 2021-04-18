@@ -112,13 +112,17 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 	public double totalPayment(String customerID) {
 		// TODO Auto-generated method stub
 		double total = 0;
+		Multimap<String, String> map = ArrayListMultimap.create();
+		Map<String, history> mapface = new HashMap<String, history>();
 		
-		collectData();
-		String[] filterPayIdArray = filterPaymentID(customerID);
-		Double[] filteramountArray = filterPaymentAmount(customerID, filterPayIdArray);
+		collectData(mapface, map);
+		
+		String[] filterPayIdArray = filterPaymentID(customerID, map);
+		Double[] filteramountArray = filterPaymentAmount(customerID, filterPayIdArray, mapface);
 		
 		for (int i = 0; i < filteramountArray.length; i++) {
 			total +=  filteramountArray[i];
+			System.out.println(filteramountArray[i]);
 		}
 		
 		return total;
@@ -129,19 +133,22 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 	@Override
 	public void paymentHistory(String customerID) {
 
-		collectData();
+		Multimap<String, String> map = ArrayListMultimap.create();
+		Map<String, history> mapface = new HashMap<String, history>();
+		
+		collectData(mapface, map);
 
 		// Filter id
 		String[] fildCustomeridArray = filtercustomerID(customerID);
 
 		// filter Payment id
-		String[] filterPayIdArray = filterPaymentID(customerID);
+		String[] filterPayIdArray = filterPaymentID(customerID,map);
 
 		// filter date
-		String[] filterdateArray = filterPaymentDate(customerID, filterPayIdArray);
+		String[] filterdateArray = filterPaymentDate(customerID, filterPayIdArray, mapface);
 
 		// filter Amount
-		Double[] filteramountArray = filterPaymentAmount(customerID, filterPayIdArray);
+		Double[] filteramountArray = filterPaymentAmount(customerID, filterPayIdArray, mapface);
 
 
 		System.out.println("+---------------+-----------------------+---------------+---------------+");
@@ -170,10 +177,9 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 	String[] paymentdate = new String[] { "1/5/2020", "1/8/2020", "1/9/2020", "9/9/2020", "8/8/2020", "31/8/2020" };
 	double[] paymentamount = new double[] { 1500.00, 1200.00, 500.00, 800.00, 650.00, 780.00 };
 
-	Multimap<String, String> map = ArrayListMultimap.create();
-	Map<String, history> mapface = new HashMap<String, history>();
+	
 
-	public void collectData() {
+	public void collectData(Map<String, history> mapface,Multimap<String, String> map) {
 
 		for (int i = 0; i < paymentid.length; i++) {
 			map.put(customerid[i], paymentid[i]);
@@ -203,12 +209,13 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 	}
 
 	//filtering payment id according to customer id 
-	public String[] filterPaymentID(String customerID) {
+	public String[] filterPaymentID(String customerID, Multimap<String, String> map) {
 
 		Collection<String> value = map.get(customerID);
 		ArrayList<String> filderdPaymentId = new ArrayList<>();
 		for (String str : value) {
 			filderdPaymentId.add(str);
+			System.out.println(str);
 		}
 		String[] filterPayIdArray = new String[filderdPaymentId.size()];
 		filderdPaymentId.toArray(filterPayIdArray);
@@ -218,7 +225,7 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 
 	
 	//filtering payment date for given customer ID
-	public String[] filterPaymentDate(String customerID, String[] filterPayIdArray) {
+	public String[] filterPaymentDate(String customerID, String[] filterPayIdArray, Map<String, history> mapface) {
 
 		ArrayList<String> paydate = new ArrayList<>();
 		for (int i = 0; i < filterPayIdArray.length; i++) {
@@ -230,7 +237,7 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 
 	}
 
-	public Double[] filterPaymentAmount(String customerID, String[] filterPayIdArray) {
+	public Double[] filterPaymentAmount(String customerID, String[] filterPayIdArray, Map<String, history> mapface) {
 
 		ArrayList<Double> payAmount = new ArrayList<>();
 		for (int i = 0; i < filterPayIdArray.length; i++) {

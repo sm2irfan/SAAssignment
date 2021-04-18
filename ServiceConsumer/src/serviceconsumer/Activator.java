@@ -21,6 +21,9 @@ public class Activator implements BundleActivator {
 
 	ServiceReference paymentHandlerVer1ServiceReference, electricalServiceDetailsServiceReference, customerDetailsServiceVer1Reference;
 
+	// service consumer bundle context -> 4
+	// payment handler bundle context -> 2
+	
 	public void start(BundleContext bundleContext) throws Exception {
 		
 		System.out.println("consumer service Start");
@@ -41,6 +44,7 @@ public class Activator implements BundleActivator {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		
+		// logo
 		System.out.println("---------------------------------------------------------------------");
 		System.out.println();
 		System.out.println("     _______  ___      _______  ______   _______  _______  _______ tm");
@@ -55,12 +59,15 @@ public class Activator implements BundleActivator {
 		System.out.println("              -------------------------------------------");
 		System.out.println();
 		
+		// declaring variables for inputing purposes
 		String  id = "" ;
 		String  number = "" ;
 		int i = 1;
 		while(i<=1) {
 			
 			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+			
+			// prompt to enter customer id
 			
 			if (customerDetailsHandlerServiceVer1.name(id) == null) {
 			System.out.print("                 Enter your customer ID -->  ");
@@ -81,19 +88,20 @@ public class Activator implements BundleActivator {
 		System.out.println("            |          Customer Payment Details        |");
 		System.out.println("            +------------------------------------------+");
 		System.out.println("            |         1 - Calculate unit payment       |");
-		System.out.println("            |         2 - Check account balance        |");
+		System.out.println("            |           2 - Check due balance          |");
 		System.out.println("            |         3 - Check payment history        |");
 		System.out.println("            +------------------------------------------+");
 		System.out.println("            |              Customer Details            |");
 		System.out.println("            +------------------------------------------+");
 		System.out.println("            |        4 - Check customer's details      |");
-		System.out.println("            |        5 - Edit customer's address       |");
 		System.out.println("            +------------------------------------------+");
 		System.out.println("            |         Electrical Service Details       |");
 		System.out.println("            +------------------------------------------+");
-		System.out.println("            |           6 - Price Calculation          |");
-		System.out.println("            |           7 - Price Calculation          |");
+		System.out.println("            |   5 - Check Electricial Service Details  |");
 		System.out.println("            +------------------------------------------+");
+		System.out.println("            |           Miscellaneous Functions        |");
+		System.out.println("            +------------------------------------------+");
+		System.out.println("            |                 98 - Manual              |");
 		System.out.println("            |             99 - Close Console           |");
 		System.out.println("            +------------------------------------------+");
 		System.out.println();
@@ -104,6 +112,8 @@ public class Activator implements BundleActivator {
 			
 			BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 			System.out.println();
+			
+			// prompt to access the features
 			
 			System.out.print("Enter the allocated number to access a specific feature -->  ");
 			number = input.readLine();
@@ -121,32 +131,30 @@ public class Activator implements BundleActivator {
 					String unit = input.readLine();
 					
 					int unitAmount = Integer.parseInt(unit);
-					System.out.println();
-					System.out.println("Final unit payment amount : " + paymentHandlerServiceVer1.priceClaculation(unitAmount, "industrial"));
+					System.out.println("---------------------------------------------------------------------");
+					System.out.println("Final unit payment amount : " + paymentHandlerServiceVer1.priceClaculation(unitAmount, serviceDetailsHandler.customerType(id)));
 					System.out.println();
 					System.out.println("---------------------------------------------------------------------");
 										
 				}
 				if( option == 2 ) {
-
-					System.out.println(paymentHandlerServiceVer1.totalPayment(id));
-
+					
+					double totalAmount = paymentHandlerServiceVer1.totalAmountForUsedUnit(id);
+					double paidAmount = paymentHandlerServiceVer1.totalPayment(id);
 					
 					System.out.println("---------------------------------------------------------------------");
-					System.out.println("                    Checking account balance....");
+					System.out.println("                    Checking due balance....");
 					System.out.println("---------------------------------------------------------------------");
 					System.out.println();
-					System.out.println("Account balance : " + paymentHandlerServiceVer1.totalPayment(id));
+					System.out.println("Total amount for used units: " + totalAmount);
+					System.out.println("Total paid amount by the client: " + paidAmount);
+					System.out.println("-----------------------------------------");
+					System.out.println("Due balance : " + (totalAmount - paidAmount));
 					System.out.println(); 
 					System.out.println("---------------------------------------------------------------------");
 					
-
 				}
 				if( option == 3 ) {
-
-					System.out.print("Payment History =>  ");
-					paymentHandlerServiceVer1.paymentHistory("id1011");
-
 					System.out.println("---------------------------------------------------------------------");
 					System.out.println("                   Checking payment history.....");
 					System.out.println("---------------------------------------------------------------------");
@@ -154,42 +162,66 @@ public class Activator implements BundleActivator {
 					System.out.println();
 					System.out.println("---------------------------------------------------------------------");
 					
-
 				}
 				if( option == 4 ) {
+					
+					System.out.println("---------------------------------------------------------------------");
+					System.out.println("                  Checking customer details.....");
+					System.out.println("---------------------------------------------------------------------");
+					System.out.println();
+					System.out.println("Customer ID : " + id);
+					System.out.println("Customer Name : " + customerDetailsHandlerServiceVer1.name(id));
+					System.out.println("Customer Address : " + customerDetailsHandlerServiceVer1.address(id));
+					System.out.println("Customer NIC : " + customerDetailsHandlerServiceVer1.NIC(id));
+					System.out.println("Customer Phone Number : " + customerDetailsHandlerServiceVer1.phoneNo(id));
+					System.out.println(); 
+					System.out.println("---------------------------------------------------------------------");
+					
 					
 				}
 				if( option == 5 ) {
 					
-				}
-				if( option == 6 ) {
+					System.out.println("---------------------------------------------------------------------");
+					System.out.println("              Checking electrical service details.....");
+					System.out.println("---------------------------------------------------------------------");
+					System.out.println();
+					System.out.println("Customer ID : " + id);
+					System.out.println("Customer Type : " + serviceDetailsHandler.customerType(id));
+					System.out.println("Customer Phase details : " + serviceDetailsHandler.PhaseDetails(id));
+					System.out.println(); 
+					System.out.println("---------------------------------------------------------------------");
 					
 				}
-				if( option == 7 ) {
+				if (option == 98 ) {
+
+					System.out.println("---------------------------------------------------------------------");
+					System.out.println("                 Manual - How to use the console");
+					System.out.println("---------------------------------------------------------------------");
+					System.out.println();
+					System.out.println("Welcome to the electrical service console, which is available for ");
+					System.out.println("all clients to access. To access the functions that are available ");
+					System.out.println("in the console, enter the appropriate number of the specific function.");
+					System.out.println("For example, to access the unit calculator, clients can enter '1' ");
+					System.out.println("in the propmt to access the function.");
+					System.out.println("To exit the console, simply enter '99'.");
+					System.out.println(); 
+					System.out.println("---------------------------------------------------------------------");
+					
 					
 				}
-				if( option == 8 ) {
-					
-				}
-				if( option == 9 ) {
-					
-				}
-				if (number.length() == 0 || number == " ") {
+				if (number.length() == 0 || number == "") {
 					break;
 				}
 	
 				if (option == 99 ) {
 					break;
 				}
-								
+				
+											
 			}	
 			
-
-				
-				
-
+			
 			j++;
-
 			
 		}
 	
@@ -205,5 +237,3 @@ public class Activator implements BundleActivator {
 	}
 
 }
-
-
