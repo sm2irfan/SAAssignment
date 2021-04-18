@@ -94,6 +94,8 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 	public double AccountBalance(String customerID) {
 		// TODO Auto-generated method stub
 		double total = 0;
+		
+		collectData();
 		String[] filterPayIdArray = filterPaymentID(customerID);
 		Double[] filteramountArray = filterPaymentAmount(customerID, filterPayIdArray);
 		
@@ -124,21 +126,22 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 		Double[] filteramountArray = filterPaymentAmount(customerID, filterPayIdArray);
 
 
-		System.out.println("+------------------+----------------------+-------------------+-----------------+");
-		System.out.println("|  Customer ID     |         Date         |    Payment ID     |       Amount    |");
-		System.out.println("+------------------+----------------------+-------------------+-----------------+");
+		System.out.println("+---------------+-----------------------+---------------+---------------+");
+		System.out.println("|Customer ID    |        Date           |  Payment ID   |   Amount      |");
+		System.out.println("+---------------+-----------------------+---------------+---------------+");
 		
 		
 		for (int i = 0; i < fildCustomeridArray.length; i++) {
 			//System.out.println("Customer Id :" + fildCustomeridArray[i] +"\tDate:"+ filterdateArray[i] +  "\t Payment Id : " + filterPayIdArray[i]
 					//+ "\t Amount : " + filteramountArray[i] + "\n");
 			
-			System.out.println("|   "+fildCustomeridArray[i]+"         |    " + filterdateArray[i]+"         |     "+filterPayIdArray[i]+"         |     "  +filteramountArray[i]+"         |");
-			System.out.println("+------------------+----------------------+-------------------+-----------------+");
+			System.out.println("|\t"+fildCustomeridArray[i]+"\t|\t" + filterdateArray[i]+"\t|\t"+filterPayIdArray[i]+"\t|\t"  +filteramountArray[i]+"\t|");
+			System.out.println("+\t\t+\t\t\t+\t\t+\t\t+");
 			
 
 		}
 
+		System.out.println("+---------------+-----------------------+---------------+---------------+");
 	}
 	
 	
