@@ -1,5 +1,13 @@
 package customerpaymenthandlerver1;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+
 public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 
 	@Override
@@ -9,7 +17,6 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 
 		switch (custType) {
 		case "domastic":
-			System.out.println("domastic customer");
 
 			if (unit > 0 && unit <= 10) {
 
@@ -43,7 +50,6 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 
 				break;
 		case "industrial":
-			System.out.println("industrial customer");
 
 			if (unit > 0 && unit <= 100) {
 
@@ -87,13 +93,161 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 	@Override
 	public double AccountBalance(String customerID) {
 		// TODO Auto-generated method stub
-		return 500;
+		double total = 0;
+		String[] filterPayIdArray = filterPaymentID(customerID);
+		Double[] filteramountArray = filterPaymentAmount(customerID, filterPayIdArray);
+		
+		for (int i = 0; i < filteramountArray.length; i++) {
+			total +=  filteramountArray[i];
+		}
+		
+		return total;
 	}
 
+	
+	
 	@Override
 	public void paymentHistory(String customerID) {
-		System.out.println("4/14/2020 : 500");
 
+		collectData();
+
+		// Filter id
+		String[] fildCustomeridArray = filtercustomerID(customerID);
+
+		// filter Payment id
+		String[] filterPayIdArray = filterPaymentID(customerID);
+
+		// filter date
+		String[] filterdateArray = filterPaymentDate(customerID, filterPayIdArray);
+
+		// filter Amount
+		Double[] filteramountArray = filterPaymentAmount(customerID, filterPayIdArray);
+
+		System.out.println("+------------------+----------------------+-------------------+-----------------+");
+		System.out.println("|  Customer ID     |         Date         |    Payment ID     |       Amount    |");
+		System.out.println("+------------------+----------------------+-------------------+-----------------+");
+		
+		
+		for (int i = 0; i < fildCustomeridArray.length; i++) {
+			//System.out.println("Customer Id :" + fildCustomeridArray[i] +"\tDate:"+ filterdateArray[i] +  "\t Payment Id : " + filterPayIdArray[i]
+					//+ "\t Amount : " + filteramountArray[i] + "\n");
+			
+			System.out.println("|   "+fildCustomeridArray[i]+"         |    " + filterdateArray[i]+"         |     "+filterPayIdArray[i]+"         |     "  +filteramountArray[i]+"         |");
+			System.out.println("+------------------+----------------------+-------------------+-----------------+");
+			
+		}
+
+	}
+	
+	
+	
+	// data for inserting
+	String[] customerid = new String[] { "id1011", "id1012", "id1012", "id1013", "id1014", "id1011" };
+	String[] paymentid = new String[] { "py901", "py902", "py903", "py904", "py905", "pay906" };
+	String[] paymentdate = new String[] { "1/5/2020", "1/8/2020", "1/9/2020", "9/9/2020", "8/8/2020", "31/8/2020" };
+	double[] paymentamount = new double[] { 1500.00, 1200.00, 500.00, 800.00, 650.00, 780.00 };
+
+	Multimap<String, String> map = ArrayListMultimap.create();
+	Map<String, history> mapface = new HashMap<String, history>();
+
+	public void collectData() {
+
+		for (int i = 0; i < paymentid.length; i++) {
+			map.put(customerid[i], paymentid[i]);
+		}
+
+		// add date and amount to hasMap
+		for (int i = 0; i < paymentid.length; i++) {
+			mapface.put(paymentid[i], new history(paymentdate[i], paymentamount[i]));
+		}
+	}
+
+	
+	// filtering how many time exist particular customer id
+	public String[] filtercustomerID(String customerID) {
+
+		ArrayList<String> filderdArrayList = new ArrayList<>();
+		for (int i = 0; i < customerid.length; i++) {
+			if (customerid[i].matches(customerID)) {
+				filderdArrayList.add(customerID);
+			}
+		}
+		String[] fildCustomeridArray = new String[filderdArrayList.size()];
+		filderdArrayList.toArray(fildCustomeridArray);
+
+		return fildCustomeridArray;
+
+	}
+
+	//filtering payment id according to customer id 
+	public String[] filterPaymentID(String customerID) {
+
+		Collection<String> value = map.get(customerID);
+		ArrayList<String> filderdPaymentId = new ArrayList<>();
+		for (String str : value) {
+			filderdPaymentId.add(str);
+		}
+		String[] filterPayIdArray = new String[filderdPaymentId.size()];
+		filderdPaymentId.toArray(filterPayIdArray);
+		return filterPayIdArray;
+
+	}
+
+	
+	//filtering payment date for given customer ID
+	public String[] filterPaymentDate(String customerID, String[] filterPayIdArray) {
+
+		ArrayList<String> paydate = new ArrayList<>();
+		for (int i = 0; i < filterPayIdArray.length; i++) {
+			paydate.add(mapface.get(filterPayIdArray[i]).getDate());
+		}
+		String[] filterdateArray = new String[paydate.size()];
+		paydate.toArray(filterdateArray);
+		return filterdateArray;
+
+	}
+
+	public Double[] filterPaymentAmount(String customerID, String[] filterPayIdArray) {
+
+		ArrayList<Double> payAmount = new ArrayList<>();
+		for (int i = 0; i < filterPayIdArray.length; i++) {
+			payAmount.add(mapface.get(filterPayIdArray[i]).getAmount());
+		}
+		Double[] filteramountArray = new Double[payAmount.size()];
+		payAmount.toArray(filteramountArray);
+		return filteramountArray;
+
+	}
+
+	
+
+}
+
+
+
+
+
+
+
+// for serving payment history date and amount
+
+class history {
+
+	String date;
+	double amount;
+
+	public history(String date, double amount) {
+		super();
+		this.date = date;
+		this.amount = amount;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public double getAmount() {
+		return amount;
 	}
 
 }
