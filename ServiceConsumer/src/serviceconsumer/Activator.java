@@ -73,7 +73,7 @@ public class Activator implements BundleActivator {
 		}
 		//Welcome Text
 		System.out.println("---------------------------------------------------------------------");
-		System.out.println("Welcome " + customerDetailsHandlerServiceVer1.name(id) + ", Logged in : " + dateFormat.format(date) );		
+		System.out.println("          Welcome " + customerDetailsHandlerServiceVer1.name(id) + ", Logged in : " + dateFormat.format(date) );		
 		System.out.println("---------------------------------------------------------------------");
 		//System.out.println("      (Enter the appropriate number to access the service below)      ");
 		System.out.println();
@@ -112,22 +112,40 @@ public class Activator implements BundleActivator {
 				
 				if( option == 1 ) {
 					
-					System.out.print("Enter no of units -->  ");
+					System.out.println("---------------------------------------------------------------------");
+					System.out.println("                    Calculating unit payment....");
+					System.out.println("---------------------------------------------------------------------");
+					System.out.println();
+					System.out.print("Enter the number of units to calculate : ");
+					
 					String unit = input.readLine();
 					
 					int unitAmount = Integer.parseInt(unit);
-					
-					System.out.println(paymentHandlerServiceVer1.priceClaculation(unitAmount, "industrial"));
-					
-					
-					
+					System.out.println();
+					System.out.println("Final unit payment amount : " + paymentHandlerServiceVer1.priceClaculation(unitAmount, "industrial"));
+					System.out.println();
+					System.out.println("---------------------------------------------------------------------");
+										
 				}
 				if( option == 2 ) {
-					System.out.println(paymentHandlerServiceVer1.AccountBalance(id));
+					
+					System.out.println("---------------------------------------------------------------------");
+					System.out.println("                    Checking account balance....");
+					System.out.println("---------------------------------------------------------------------");
+					System.out.println();
+					System.out.println("Account balance : " + paymentHandlerServiceVer1.AccountBalance(id));
+					System.out.println(); 
+					System.out.println("---------------------------------------------------------------------");
+					
 				}
 				if( option == 3 ) {
-					System.out.print("Payment History =>  ");
+					System.out.println("---------------------------------------------------------------------");
+					System.out.println("                   Checking payment history.....");
+					System.out.println("---------------------------------------------------------------------");
 					paymentHandlerServiceVer1.paymentHistory(id);
+					System.out.println();
+					System.out.println("---------------------------------------------------------------------");
+					
 				}
 				if( option == 4 ) {
 					
@@ -154,10 +172,11 @@ public class Activator implements BundleActivator {
 				if (option == 99 ) {
 					break;
 				}
+								
 			}	
 			
 			
-				j++;
+			j++;
 			
 		}
 	
@@ -173,4 +192,5 @@ public class Activator implements BundleActivator {
 	}
 
 }
+
 
