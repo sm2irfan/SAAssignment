@@ -29,11 +29,9 @@ public class CustomerDetailsHandlerServiceImpl implements CustomerDetailsHandler
 		Map<String, String> mapName = new HashMap<String, String>();
 		loadIntoHash(keys, values, mapName);
 		String name = mapName.get(customerID);
-		if (name == null) {
-			return "please enter correct customer ID";
-		}else {
+		
 			return name;
-		}
+		
 	}
 	
 	

@@ -17,7 +17,6 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 
 		switch (custType) {
 		case "domastic":
-			System.out.println("domastic customer");
 
 			if (unit > 0 && unit <= 10) {
 
@@ -51,7 +50,6 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 
 				break;
 		case "industrial":
-			System.out.println("industrial customer");
 
 			if (unit > 0 && unit <= 100) {
 
@@ -125,9 +123,20 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 		// filter Amount
 		Double[] filteramountArray = filterPaymentAmount(customerID, filterPayIdArray);
 
+
+		System.out.println("+------------------+----------------------+-------------------+-----------------+");
+		System.out.println("|  Customer ID     |         Date         |    Payment ID     |       Amount    |");
+		System.out.println("+------------------+----------------------+-------------------+-----------------+");
+		
+		
 		for (int i = 0; i < fildCustomeridArray.length; i++) {
-			System.out.println("Customer Id :" + fildCustomeridArray[i] +"\tDate:"+ filterdateArray[i] +  "\t Payment Id : " + filterPayIdArray[i]
-					+ "\t Amount : " + filteramountArray[i] + "\n");
+			//System.out.println("Customer Id :" + fildCustomeridArray[i] +"\tDate:"+ filterdateArray[i] +  "\t Payment Id : " + filterPayIdArray[i]
+					//+ "\t Amount : " + filteramountArray[i] + "\n");
+			
+			System.out.println("|   "+fildCustomeridArray[i]+"         |    " + filterdateArray[i]+"         |     "+filterPayIdArray[i]+"         |     "  +filteramountArray[i]+"         |");
+			System.out.println("+------------------+----------------------+-------------------+-----------------+");
+			
+
 		}
 
 	}
