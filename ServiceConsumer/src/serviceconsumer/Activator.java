@@ -139,17 +139,16 @@ public class Activator implements BundleActivator {
 				}
 				if( option == 2 ) {
 					
-					double totalAmount = paymentHandlerServiceVer1.totalAmountForUsedUnit(id);
-					double paidAmount = paymentHandlerServiceVer1.totalPayment(id);
+					
 					
 					System.out.println("---------------------------------------------------------------------");
 					System.out.println("                    Checking due balance....");
 					System.out.println("---------------------------------------------------------------------");
 					System.out.println();
-					System.out.println("Total amount for used units: " + totalAmount);
-					System.out.println("Total paid amount by the client: " + paidAmount);
+					System.out.println("Total amount for used units: " + paymentHandlerServiceVer1.totalAmountForUsedUnit(id));
+					System.out.println("Total paid amount by the client: " + paymentHandlerServiceVer1.totalPayment(id));
 					System.out.println("-----------------------------------------");
-					System.out.println("Due balance : " + (totalAmount - paidAmount));
+					System.out.println("Due balance : " + (paymentHandlerServiceVer1.totalAmountForUsedUnit(id) - paymentHandlerServiceVer1.totalPayment(id)));
 					System.out.println(); 
 					System.out.println("---------------------------------------------------------------------");
 					

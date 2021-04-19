@@ -122,7 +122,6 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 		
 		for (int i = 0; i < filteramountArray.length; i++) {
 			total +=  filteramountArray[i];
-			System.out.println(filteramountArray[i]);
 		}
 		
 		return total;
@@ -215,7 +214,7 @@ public class PaymentHandlerServiceImpl implements PaymentHandlerService {
 		ArrayList<String> filderdPaymentId = new ArrayList<>();
 		for (String str : value) {
 			filderdPaymentId.add(str);
-			System.out.println(str);
+			
 		}
 		String[] filterPayIdArray = new String[filderdPaymentId.size()];
 		filderdPaymentId.toArray(filterPayIdArray);
